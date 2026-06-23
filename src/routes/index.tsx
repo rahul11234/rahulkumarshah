@@ -304,12 +304,12 @@ function WhyMe() {
 /* ---------------- PORTFOLIO ---------------- */
 function Portfolio() {
   const projects = [
-    { client: "Lumen Skincare", industry: "E-commerce / Beauty", objective: "Scale online sales", strategy: "Advantage+ Shopping + Creative testing framework", results: "6.4x ROAS · 38% lower CAC", color: "from-pink-500 to-primary" },
-    { client: "FitForge Gym", industry: "Fitness / Local", objective: "Generate qualified leads", strategy: "Lead Forms + WhatsApp retargeting", results: "1,240 leads · $1.85 CPL", color: "from-accent to-emerald-500" },
-    { client: "EduPath Academy", industry: "Online Education", objective: "Course enrollments", strategy: "Webinar funnel + lookalike audiences", results: "320% increase in signups", color: "from-primary to-[var(--primary-dark)]" },
-    { client: "Casa Interiors", industry: "Home & Furniture", objective: "Showroom visits", strategy: "Geo-targeted video ads + retargeting", results: "4.2x ROAS · +210% inquiries", color: "from-amber-500 to-pink-500" },
-    { client: "Nova Realty", industry: "Real Estate", objective: "Pre-launch bookings", strategy: "Lead Gen + Instagram Reels ads", results: "560 leads in 3 weeks", color: "from-[var(--primary-dark)] to-accent" },
-    { client: "BrewCraft Co.", industry: "F&B / D2C", objective: "Increase subscriptions", strategy: "Full-funnel video + UGC creative", results: "5.1x ROAS · 47% repeat orders", color: "from-orange-500 to-red-500" },
+    { client: "Himalayan Threads", industry: "Fashion · Kathmandu", objective: "Drive online sales via Instagram", strategy: "Sales campaign + creative testing in Nepali", results: "5.2x ROAS · Rs. 18 CPP", color: "from-pink-500 to-primary" },
+    { client: "Annapurna Trekking Co.", industry: "Travel · Pokhara", objective: "Generate trek inquiries", strategy: "Messenger Ads + WhatsApp follow-up", results: "640 chats · Rs. 42 / lead", color: "from-accent to-emerald-500" },
+    { client: "EverestEdu Consultancy", industry: "Abroad Study · Kathmandu", objective: "Student counselling leads", strategy: "Instant Forms + lookalike of past students", results: "1,180 leads · Rs. 56 CPL", color: "from-primary to-[var(--primary-dark)]" },
+    { client: "Newa Kitchen", industry: "Restaurant · Lalitpur", objective: "Daily table bookings", strategy: "Click-to-WhatsApp + reels ads", results: "+212% weekend bookings", color: "from-amber-500 to-pink-500" },
+    { client: "Sherpa Realty", industry: "Real Estate · Bhaktapur", objective: "Site visit bookings", strategy: "Lead Gen + retargeting visitors", results: "320 site visits in 45 days", color: "from-[var(--primary-dark)] to-accent" },
+    { client: "Tamang Organic Tea", industry: "D2C · Ilam", objective: "Scale e-commerce orders", strategy: "Advantage+ Shopping · UGC reels", results: "4.6x ROAS · 38% new buyers", color: "from-orange-500 to-red-500" },
   ];
   return (
     <section id="portfolio" className="section-pad bg-muted/30 border-y border-border">
@@ -360,22 +360,44 @@ function Row({ label, value, highlight }: { label: string; value: string; highli
 function CaseStudies() {
   const cases = [
     {
-      title: "D2C Skincare Brand — Scaling Profitably to 6.4x ROAS",
-      tag: "E-commerce",
+      title: "Newa Kitchen — Click-to-WhatsApp Message Campaign",
+      tag: "Message Campaign · Lalitpur",
       metrics: [
-        { k: "ROAS", v: "6.4x" }, { k: "Cost / Purchase", v: "$8.20" },
-        { k: "Conversion Rate", v: "3.9%" }, { k: "Reach", v: "1.2M" },
+        { k: "Conversations", v: "2,840" }, { k: "Cost / Message", v: "Rs. 11" },
+        { k: "Bookings", v: "612" }, { k: "Reach", v: "184K" },
       ],
-      summary: "Restructured the account into Advantage+ Shopping with a disciplined creative testing pipeline. Scaled ad spend 4x while keeping ROAS above 6x for 90 days straight.",
+      summary:
+        "Built a Click-to-WhatsApp campaign for a Newari restaurant in Patan. Used short Nepali-language reels of signature dishes with a one-tap WhatsApp CTA. Weekend tables booked out 6 weeks in a row, with cost per message dropping 47% after the first creative refresh.",
     },
     {
-      title: "Local Fitness Brand — 1,240 Qualified Leads in 60 Days",
-      tag: "Lead Generation",
+      title: "Himalayan Threads — Instagram Sales Campaign in Kathmandu",
+      tag: "Sales Campaign · Fashion",
       metrics: [
-        { k: "Leads", v: "1,240" }, { k: "CPL", v: "$1.85" },
-        { k: "Show-up Rate", v: "62%" }, { k: "Reach", v: "480K" },
+        { k: "ROAS", v: "5.2x" }, { k: "Cost / Purchase", v: "Rs. 318" },
+        { k: "Orders", v: "1,460" }, { k: "Reach", v: "920K" },
       ],
-      summary: "Built a Meta lead gen funnel with WhatsApp follow-up, geo-fenced audiences, and high-intent creative angles tailored to local intent.",
+      summary:
+        "Restructured the ad account into Advantage+ Shopping with 3 creative angles: festival drops, daily-wear styling, and customer reviews in Nepali. Scaled monthly ad spend from Rs. 80K to Rs. 3.2L while keeping ROAS above 5x for 3 months straight.",
+    },
+    {
+      title: "EverestEdu Consultancy — Abroad Study Lead Campaign",
+      tag: "Lead Campaign · Education",
+      metrics: [
+        { k: "Leads", v: "1,180" }, { k: "Cost / Lead", v: "Rs. 56" },
+        { k: "Counselling Shows", v: "68%" }, { k: "Enrollments", v: "184" },
+      ],
+      summary:
+        "Built an Instant Form lead funnel targeting Bagmati province parents and +2 graduates. Used lookalike audiences from past visa-approved students and country-specific creatives (Australia, Japan, UK). Delivered 1,180 qualified leads in 8 weeks at Rs. 56 CPL.",
+    },
+    {
+      title: "Annapurna Trekking Co. — Monsoon Off-Season Message Ads",
+      tag: "Message Campaign · Travel",
+      metrics: [
+        { k: "Chats", v: "640" }, { k: "Cost / Chat", v: "Rs. 42" },
+        { k: "Trek Bookings", v: "92" }, { k: "Avg. Ticket", v: "Rs. 38K" },
+      ],
+      summary:
+        "Ran a Messenger + WhatsApp campaign targeting Indian and domestic travellers during a typically slow season. Custom audience exclusions filtered out past bookers, and a quick 4-question chat flow qualified leads before the sales team replied.",
     },
   ];
   return (
