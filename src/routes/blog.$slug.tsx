@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/Reveal";
-import { getPost, posts } from "@/lib/blog";
+import { getPost, posts, type BlogPost } from "@/lib/blog";
 import { WHATSAPP_LINK } from "@/lib/site";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -42,7 +42,7 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function BlogPostPage() {
-  const { post } = Route.useLoaderData();
+  const { post } = Route.useLoaderData() as { post: BlogPost };
   const related = posts.filter((p) => p.slug !== post.slug).slice(0, 2);
 
   return (
