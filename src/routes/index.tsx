@@ -17,6 +17,8 @@ import {
 import { Reveal } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { WHATSAPP_LINK, WHATSAPP_NUMBER } from "@/lib/site";
+import rahulPhoto from "@/assets/rahul-profile.jpg.asset.json";
+import rahulIntro from "@/assets/rahul-intro.webm.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,6 +40,7 @@ function Home() {
       <Hero />
       <Stats />
       <About />
+      <IntroVideo />
       <Services />
       <WhyMe />
       <Portfolio />
@@ -50,6 +53,48 @@ function Home() {
       <FAQ />
       <Contact />
     </>
+  );
+}
+
+/* ---------------- INTRO VIDEO ---------------- */
+function IntroVideo() {
+  return (
+    <section id="intro-video" className="section-pad">
+      <div className="container-x grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center">
+        <Reveal>
+          <SectionLabel>Meet Rahul</SectionLabel>
+          <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold">
+            A 60-second intro to <span className="gradient-text">how I work</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            Hear directly how I approach Meta Ads for Nepali businesses — from creative angles to message campaigns that convert chats into paying customers.
+          </p>
+          <div className="mt-6 grid grid-cols-3 gap-3 max-w-md">
+            {[{n:"5+",l:"Years"},{n:"100+",l:"Campaigns"},{n:"$0.32",l:"Avg CPL"}].map((x)=>(
+              <div key={x.l} className="rounded-xl border border-border p-3 text-center bg-card">
+                <div className="font-display text-lg font-bold gradient-text">{x.n}</div>
+                <div className="text-[11px] text-muted-foreground mt-0.5">{x.l}</div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+        <Reveal delay={120}>
+          <div className="relative">
+            <div className="absolute -inset-4 rounded-3xl gradient-bg opacity-20 blur-2xl" />
+            <div className="relative rounded-3xl overflow-hidden border border-border bg-card shadow-elegant">
+              <video
+                src={rahulIntro.url}
+                controls
+                playsInline
+                preload="metadata"
+                poster={rahulPhoto.url}
+                className="w-full h-auto aspect-[9/16] sm:aspect-video object-cover bg-black"
+              />
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
   );
 }
 
@@ -110,7 +155,7 @@ function Hero() {
               <div className="mt-5 space-y-4">
                 <DashCard label="ROAS" value="6.8x" trend="+42%" color="from-primary to-[var(--primary-dark)]" />
                 <DashCard label="Leads Generated" value="12,486" trend="+128%" color="from-accent to-emerald-500" />
-                <DashCard label="Cost Per Lead" value="$1.92" trend="-37%" color="from-[var(--primary-dark)] to-primary" inverse />
+                <DashCard label="Cost Per Lead" value="$0.32" trend="-58%" color="from-[var(--primary-dark)] to-primary" inverse />
                 <div className="rounded-xl border border-border p-4">
                   <div className="flex items-center justify-between text-xs text-muted-foreground">
                     <span>Conversion Trend</span><span>30 days</span>
@@ -148,7 +193,7 @@ function DashCard({ label, value, trend, color, inverse }: { label: string; valu
 function Stats() {
   const items = [
     { value: 100, suffix: "+", label: "Campaigns Launched" },
-    { value: 25, suffix: "M+", label: "Ad Spend Managed" },
+    { value: 1, suffix: "M+ USD", label: "Ad Spend Managed" },
     { value: 6, suffix: "x", label: "Average ROAS" },
     { value: 98, suffix: "%", label: "Client Satisfaction" },
   ];
@@ -178,11 +223,20 @@ function About() {
           <div className="relative">
             <div className="absolute -inset-6 rounded-3xl gradient-bg opacity-15 blur-2xl" />
             <div className="relative rounded-3xl border border-border bg-card overflow-hidden">
-              <div className="aspect-[4/5] bg-gradient-to-br from-primary/15 via-background to-accent/10 grid place-items-center">
-                <div className="text-center px-6">
-                  <div className="mx-auto h-32 w-32 rounded-full gradient-bg grid place-items-center text-primary-foreground font-display text-5xl font-bold shadow-elegant">RS</div>
-                  <div className="mt-5 font-display text-xl font-bold">Rahul K. Sah</div>
-                  <div className="text-sm text-muted-foreground">Performance Marketing Specialist</div>
+              <div className="relative aspect-[4/5]">
+                <img
+                  src={rahulPhoto.url}
+                  alt="Rahul K. Sah — Performance Marketing Specialist based in Nepal"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute top-4 right-4 rounded-xl bg-background/90 backdrop-blur px-3 py-2 shadow-soft border border-border">
+                  <div className="text-[10px] text-muted-foreground">Based in</div>
+                  <div className="text-xs font-semibold flex items-center gap-1">📍 Nepal · Global</div>
+                </div>
+                <div className="absolute bottom-4 left-4 rounded-xl bg-background/90 backdrop-blur px-3 py-2 shadow-soft border border-border">
+                  <div className="font-display text-sm font-bold">Rahul K. Sah</div>
+                  <div className="text-[11px] text-muted-foreground">Meta Ads Specialist</div>
                 </div>
               </div>
               <div className="grid grid-cols-3 divide-x divide-border border-t border-border">
@@ -304,11 +358,11 @@ function WhyMe() {
 /* ---------------- PORTFOLIO ---------------- */
 function Portfolio() {
   const projects = [
-    { client: "Himalayan Threads", industry: "Fashion · Kathmandu", objective: "Drive online sales via Instagram", strategy: "Sales campaign + creative testing in Nepali", results: "5.2x ROAS · Rs. 18 CPP", color: "from-pink-500 to-primary" },
-    { client: "Annapurna Trekking Co.", industry: "Travel · Pokhara", objective: "Generate trek inquiries", strategy: "Messenger Ads + WhatsApp follow-up", results: "640 chats · Rs. 42 / lead", color: "from-accent to-emerald-500" },
-    { client: "EverestEdu Consultancy", industry: "Abroad Study · Kathmandu", objective: "Student counselling leads", strategy: "Instant Forms + lookalike of past students", results: "1,180 leads · Rs. 56 CPL", color: "from-primary to-[var(--primary-dark)]" },
-    { client: "Newa Kitchen", industry: "Restaurant · Lalitpur", objective: "Daily table bookings", strategy: "Click-to-WhatsApp + reels ads", results: "+212% weekend bookings", color: "from-amber-500 to-pink-500" },
-    { client: "Sherpa Realty", industry: "Real Estate · Bhaktapur", objective: "Site visit bookings", strategy: "Lead Gen + retargeting visitors", results: "320 site visits in 45 days", color: "from-[var(--primary-dark)] to-accent" },
+    { client: "Himalayan Threads", industry: "Fashion · Kathmandu", objective: "Drive online sales via Instagram", strategy: "Advantage+ Shopping + Nepali creative testing", results: "5.2x ROAS · $2.85 CPP", color: "from-pink-500 to-primary" },
+    { client: "Annapurna Trekking Co.", industry: "Travel · Pokhara", objective: "Generate trek inquiries", strategy: "Messenger Ads + WhatsApp follow-up", results: "640 chats · $0.38 / chat", color: "from-accent to-emerald-500" },
+    { client: "EverestEdu Consultancy", industry: "Abroad Study · Kathmandu", objective: "Student counselling leads", strategy: "Instant Forms + lookalike of past students", results: "1,180 leads · $0.48 CPL", color: "from-primary to-[var(--primary-dark)]" },
+    { client: "Newa Kitchen", industry: "Restaurant · Lalitpur", objective: "Daily table bookings", strategy: "Click-to-WhatsApp + reels ads", results: "+212% bookings · $0.09 / msg", color: "from-amber-500 to-pink-500" },
+    { client: "Sherpa Realty", industry: "Real Estate · Bhaktapur", objective: "Site visit bookings", strategy: "Lead Gen + retargeting visitors", results: "320 site visits · $1.20 / lead", color: "from-[var(--primary-dark)] to-accent" },
     { client: "Tamang Organic Tea", industry: "D2C · Ilam", objective: "Scale e-commerce orders", strategy: "Advantage+ Shopping · UGC reels", results: "4.6x ROAS · 38% new buyers", color: "from-orange-500 to-red-500" },
   ];
   return (
@@ -363,7 +417,7 @@ function CaseStudies() {
       title: "Newa Kitchen — Click-to-WhatsApp Message Campaign",
       tag: "Message Campaign · Lalitpur",
       metrics: [
-        { k: "Conversations", v: "2,840" }, { k: "Cost / Message", v: "Rs. 11" },
+        { k: "Conversations", v: "2,840" }, { k: "Cost / Message", v: "$0.09" },
         { k: "Bookings", v: "612" }, { k: "Reach", v: "184K" },
       ],
       summary:
@@ -373,28 +427,28 @@ function CaseStudies() {
       title: "Himalayan Threads — Instagram Sales Campaign in Kathmandu",
       tag: "Sales Campaign · Fashion",
       metrics: [
-        { k: "ROAS", v: "5.2x" }, { k: "Cost / Purchase", v: "Rs. 318" },
+        { k: "ROAS", v: "5.2x" }, { k: "Cost / Purchase", v: "$2.85" },
         { k: "Orders", v: "1,460" }, { k: "Reach", v: "920K" },
       ],
       summary:
-        "Restructured the ad account into Advantage+ Shopping with 3 creative angles: festival drops, daily-wear styling, and customer reviews in Nepali. Scaled monthly ad spend from Rs. 80K to Rs. 3.2L while keeping ROAS above 5x for 3 months straight.",
+        "Restructured the ad account into Advantage+ Shopping with 3 creative angles: festival drops, daily-wear styling, and customer reviews in Nepali. Scaled monthly ad spend from $720 to $2,880 while keeping ROAS above 5x for 3 months straight.",
     },
     {
       title: "EverestEdu Consultancy — Abroad Study Lead Campaign",
       tag: "Lead Campaign · Education",
       metrics: [
-        { k: "Leads", v: "1,180" }, { k: "Cost / Lead", v: "Rs. 56" },
+        { k: "Leads", v: "1,180" }, { k: "Cost / Lead", v: "$0.48" },
         { k: "Counselling Shows", v: "68%" }, { k: "Enrollments", v: "184" },
       ],
       summary:
-        "Built an Instant Form lead funnel targeting Bagmati province parents and +2 graduates. Used lookalike audiences from past visa-approved students and country-specific creatives (Australia, Japan, UK). Delivered 1,180 qualified leads in 8 weeks at Rs. 56 CPL.",
+        "Built an Instant Form lead funnel targeting Bagmati province parents and +2 graduates. Used lookalike audiences from past visa-approved students and country-specific creatives (Australia, Japan, UK). Delivered 1,180 qualified leads in 8 weeks at $0.48 CPL — well below the $1.50+ industry average.",
     },
     {
       title: "Annapurna Trekking Co. — Monsoon Off-Season Message Ads",
       tag: "Message Campaign · Travel",
       metrics: [
-        { k: "Chats", v: "640" }, { k: "Cost / Chat", v: "Rs. 42" },
-        { k: "Trek Bookings", v: "92" }, { k: "Avg. Ticket", v: "Rs. 38K" },
+        { k: "Chats", v: "640" }, { k: "Cost / Chat", v: "$0.38" },
+        { k: "Trek Bookings", v: "92" }, { k: "Avg. Ticket", v: "$340" },
       ],
       summary:
         "Ran a Messenger + WhatsApp campaign targeting Indian and domestic travellers during a typically slow season. Custom audience exclusions filtered out past bookers, and a quick 4-question chat flow qualified leads before the sales team replied.",
@@ -643,7 +697,7 @@ function Blog() {
 function FAQ() {
   const faqs = [
     { q: "What's your typical engagement model?", a: "I work on monthly retainers tailored to your ad spend and goals. Project-based campaigns are also available." },
-    { q: "What is the minimum ad budget you work with?", a: "I typically recommend a minimum monthly ad budget of $1,000 to gather enough data for optimization, though it depends on the industry." },
+    { q: "What is the minimum ad budget you work with?", a: "For Nepali businesses I usually start from around $200–$300/month in ad spend — enough to gather data and prove the funnel before scaling." },
     { q: "How quickly will I see results?", a: "Most clients see directional results within the first 2 weeks, with meaningful ROAS improvements by week 4–6." },
     { q: "Do you handle creative production?", a: "I provide creative direction and briefs. I can collaborate with your designer or recommend trusted creators." },
     { q: "Will I own my Meta Ads account?", a: "Always. You own your Business Manager, ad account, pixel, and all assets — full transparency, no lock-ins." },
