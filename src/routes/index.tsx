@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import {
@@ -19,6 +19,7 @@ import { Counter } from "@/components/site/Counter";
 import { WHATSAPP_LINK, WHATSAPP_NUMBER } from "@/lib/site";
 import rahulPhoto from "@/assets/rahul-profile.jpg.asset.json";
 import rahulIntro from "@/assets/rahul-intro.webm.asset.json";
+import { posts as blogPosts } from "@/lib/blog";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -88,8 +89,9 @@ function IntroVideo() {
                 playsInline
                 preload="metadata"
                 poster={rahulPhoto.url}
-                className="w-full h-auto aspect-[9/16] sm:aspect-video object-cover bg-black"
+                className="w-full h-auto aspect-video object-contain bg-black"
               />
+
             </div>
           </div>
         </Reveal>
@@ -650,11 +652,6 @@ function Testimonials() {
 
 /* ---------------- BLOG ---------------- */
 function Blog() {
-  const posts = [
-    { title: "5 Meta Ads Mistakes That Kill Your ROAS", tag: "Strategy", read: "5 min" },
-    { title: "How to Build a Creative Testing Framework in 2025", tag: "Creative", read: "7 min" },
-    { title: "Advantage+ vs Manual Campaigns: What's Actually Working", tag: "Meta Updates", read: "6 min" },
-  ];
   return (
     <section id="blog" className="section-pad bg-muted/30 border-y border-border">
       <div className="container-x">
@@ -668,9 +665,13 @@ function Blog() {
           <span className="text-xs text-muted-foreground">More articles coming soon</span>
         </div>
         <div className="mt-10 grid md:grid-cols-3 gap-5">
-          {posts.map((p, i) => (
-            <Reveal key={p.title} delay={i * 80}>
-              <article className="group h-full rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant transition">
+          {blogPosts.map((p, i) => (
+            <Reveal key={p.slug} delay={i * 80}>
+              <Link
+                to="/blog/$slug"
+                params={{ slug: p.slug }}
+                className="group h-full block rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elegant hover:border-primary/40 transition"
+              >
                 <div className="aspect-[16/9] gradient-bg relative overflow-hidden">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.25),transparent_60%)]" />
                 </div>
@@ -680,11 +681,12 @@ function Blog() {
                     <span>{p.read} read</span>
                   </div>
                   <h3 className="mt-3 font-display text-lg font-semibold group-hover:text-primary transition">{p.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{p.excerpt}</p>
                   <div className="mt-4 inline-flex items-center text-sm text-primary font-medium">
-                    Read more <ArrowRight className="ml-1 h-4 w-4" />
+                    Read article <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-0.5 transition" />
                   </div>
                 </div>
-              </article>
+              </Link>
             </Reveal>
           ))}
         </div>
@@ -692,6 +694,7 @@ function Blog() {
     </section>
   );
 }
+
 
 /* ---------------- FAQ ---------------- */
 function FAQ() {
