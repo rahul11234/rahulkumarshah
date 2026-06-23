@@ -88,8 +88,9 @@ function IntroVideo() {
                 playsInline
                 preload="metadata"
                 poster={rahulPhoto.url}
-                className="w-full h-auto aspect-[9/16] sm:aspect-video object-cover bg-black"
+                className="w-full h-auto aspect-video object-contain bg-black"
               />
+
             </div>
           </div>
         </Reveal>
